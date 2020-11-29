@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddNoteFragment">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/input_name_note"
+            tools:ignore="LabelFor"
+            style="@style/editText"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/input_text_note"
+            tools:ignore="LabelFor"
+            style="@style/editText"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/btn_add_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_add_note"
+            android:layout_margin="@dimen/app_margin"/>
+    </LinearLayout>
+
+
+</FrameLayout>
