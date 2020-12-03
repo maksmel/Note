@@ -14,15 +14,21 @@
 
         <EditText
             android:id="@+id/inputTitleNote"
+            android:hint="Title"
             tools:ignore="LabelFor"
-            style="@style/editText"
-            android:autofillHints="" />
+            style="@style/editText"/>
 
         <EditText
             android:id="@+id/inputTextNote"
             tools:ignore="LabelFor"
-            style="@style/editText"
-            android:autofillHints="" />
+            android:hint="Body"
+            style="@style/editText"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/inputCategoryNote"
+            tools:ignore="LabelFor"
+            android:hint="Category"
+            style="@style/editText"/>
 
         <Button
             android:id="@+id/btnAddNote"

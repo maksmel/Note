@@ -18,6 +18,10 @@ import kotlin.coroutines.CoroutineContext
 class NotesFragment : Fragment(), CoroutineScope {
 
     override val coroutineContext = Dispatchers.Main
+    private val adapter = NotesAdapter {
+        launch(Dispatchers.IO) { App.db.noteDao().delete(it) }
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,13 +29,14 @@ class NotesFragment : Fragment(), CoroutineScope {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        notesList.adapter = adapter
         btnAddNewNote.setOnClickListener {
             findNavController().navigate(R.id.action_notesFragment_to_addNoteFragment)
         }
 
         launch {
             val notes = async(Dispatchers.IO) { App.db.noteDao().getAll() }
-            notesList.adapter = NotesAdapter(notes.await())
+            adapter.updateNotes(notes.await().map {it.note})
         }
     }
 }
