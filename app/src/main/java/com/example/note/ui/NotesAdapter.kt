@@ -31,6 +31,7 @@ class NotesAdapter(
             deleteNote(it)
             notes.removeAt(position)
             notifyItemRemoved(position)
+            notifyItemChanged(position, itemCount)
 
         }
     }

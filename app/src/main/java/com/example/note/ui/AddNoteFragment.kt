@@ -1,11 +1,14 @@
 package com.example.note.ui
 
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.example.note.App
@@ -57,10 +60,23 @@ class AddNoteFragment : Fragment(), CoroutineScope {
             if (title.isNotEmpty() && body.isNotEmpty() && category.isNotEmpty())
 
                 launch {
-                    withContext(Dispatchers.IO) { App.db.categoryDao().insert(Category(category))}
+                    withContext(Dispatchers.IO) { App.db.categoryDao().insert(Category(category)) }
                     withContext(Dispatchers.IO) { App.db.noteDao().insert(Note(title, body, category)) }
                     findNavController().popBackStack()
                 }
+            else
+            (AnimatorInflater.loadAnimator(requireContext(), R.animator.error_animation) as AnimatorSet).apply {
+                setTarget(inputTitleNote)
+                start()
+            }
+            (AnimatorInflater.loadAnimator(requireContext(), R.animator.error_animation) as AnimatorSet).apply {
+                setTarget(inputTextNote)
+                start()
+            }
+            (AnimatorInflater.loadAnimator(requireContext(), R.animator.error_animation) as AnimatorSet).apply {
+                setTarget(inputCategoryNote)
+                start()
+            }
         }
     }
 }
